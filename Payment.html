@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Payment — StayVenture</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+<nav class="navbar navbar-solid" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><span class="logo-icon">✦</span><span>StayVenture</span></a>
+    <div class="nav-auth"><a href="index.html" class="btn-nav-ghost">← Back to Home</a></div>
+  </div>
+</nav>
+<div style="padding-top:72px;min-height:100vh;background:var(--bg)">
+<div class="payment-layout">
+  <div>
+    <div class="payment-card">
+      <h2>Secure <em>Payment</em></h2>
+      <p>Your booking is almost confirmed. Choose your payment method below.</p>
+      <div class="secure-badge">🔒 256-bit SSL encrypted · PCI-DSS compliant</div>
+      <div class="payment-methods">
+        <button class="pay-method-btn active" onclick="selectPayMethod('stripe',this)">
+          <span class="pay-method-icon">💳</span>Pay with Stripe
+        </button>
+        <button class="pay-method-btn" onclick="selectPayMethod('razorpay',this)">
+          <span class="pay-method-icon">📱</span>Pay with Razorpay
+        </button>
+      </div>
+      <div id="stripeForm">
+        <div class="card-form">
+          <div class="form-group">
+            <label>Cardholder Name</label>
+            <input type="text" id="cardName" placeholder="As on your card"/>
+          </div>
+          <div class="form-group">
+            <label>Card Number</label>
+            <div class="card-num-wrap">
+              <input type="text" id="cardNum" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCard(this)"/>
+              <div class="card-icons"><span>💳</span><span>🔵</span></div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Expiry</label><input type="text" placeholder="MM / YY" maxlength="7" oninput="formatExpiry(this)"/></div>
+            <div class="form-group"><label>CVV</label><input type="password" placeholder="•••" maxlength="4"/></div>
+          </div>
+        </div>
+      </div>
+      <div id="razorpayForm" style="display:none">
+        <div style="background:var(--bg-warm);border-radius:14px;padding:24px;border:1px solid var(--border);text-align:center">
+          <div style="font-size:3rem;margin-bottom:12px">📱</div>
+          <p style="font-size:.9rem;color:var(--text-mid)">You'll be redirected to Razorpay's secure payment gateway to complete UPI, Net Banking, or Card payment.</p>
+        </div>
+      </div>
+      <button class="btn-pay" onclick="processPayment()">🔒 Pay Securely Now</button>
+      <p class="pay-note">By completing this payment you agree to our Terms of Service and Cancellation Policy.</p>
+    </div>
+  </div>
+  <div>
+    <div class="summary-card" style="position:sticky;top:100px">
+      <div class="summary-img" id="paymentSummaryImg" style="background-image:url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&q=80')"></div>
+      <div class="summary-body">
+        <div class="summary-dest" id="payDest">Destination</div>
+        <div class="summary-title" id="payTitle">Your Trip</div>
+        <div class="summary-rows">
+          <div class="summary-row"><span>📅 Dates</span><strong id="payDates">—</strong></div>
+          <div class="summary-row"><span>🌙 Nights</span><strong id="payNights">—</strong></div>
+          <div class="summary-row"><span>👥 Guests</span><strong id="payGuests">—</strong></div>
+          <div class="summary-row"><span>💼 Package</span><strong id="payPkg">Standard</strong></div>
+        </div>
+        <div class="summary-total">
+          <span>Total Payable</span>
+          <strong id="payTotal">₹0</strong>
+        </div>
+        <div style="margin-top:12px;padding:12px;background:var(--bg-warm);border-radius:10px;font-size:.78rem;color:var(--text-mid);text-align:center">
+          ✅ Free cancellation within 48 hrs<br/>🛡️ Travel insurance included<br/>24/7 customer support
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="global-toast" id="globalToast"></div>
+<script src="script.js"></script>
+</body>
+</html>

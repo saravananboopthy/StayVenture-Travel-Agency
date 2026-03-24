@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StayVenture — Explore the World</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+  <!-- NOTIFICATION BAR -->
+  <div class="notif-bar">✈️ Limited Time: Up to 30% off all packages this month! <a href="Packages.html">Book Now →</a>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo"><span class="logo-icon">✦</span><span>StayVenture</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="Destination.html">Destinations</a></li>
+        <li><a href="Packages.html">Packages</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="Dashboard.html" id="navDashLink" style="display:none">Dashboard</a></li>
+      </ul>
+      <div class="nav-auth" id="navAuth">
+        <a href="Login.html" class="btn-nav-ghost">Sign In</a>
+        <a href="Signup.html" class="btn-nav-fill">Get Started</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <div class="hero-img"
+        style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80')"></div>
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-floats">
+      <span class="hf hf1">🌴</span><span class="hf hf2">✈️</span>
+      <span class="hf hf3">🗺️</span><span class="hf hf4">⭐</span>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge reveal">✦ Trusted by 250,000+ Travelers</div>
+      <h1 class="hero-title reveal">Explore the<br /><em>World</em> with Us</h1>
+      <p class="hero-sub reveal">Handcrafted journeys to the world's most extraordinary places. Your perfect adventure
+        starts here.</p>
+      <div class="hero-search-wrap reveal">
+        <div class="search-box">
+          <div class="search-field">
+            <label>Where to?</label>
+            <input type="text" placeholder="Search destinations..." id="heroSearch"
+              onkeypress="if(event.key==='Enter')handleSearch()" />
+          </div>
+          <div class="s-div"></div>
+          <div class="search-field">
+            <label>When?</label>
+            <input type="date" id="heroDate" />
+          </div>
+          <div class="s-div"></div>
+          <div class="search-field">
+            <label>Travelers</label>
+            <select id="heroGuests">
+              <option>1 Person</option>
+              <option>2 People</option>
+              <option>3–5 People</option>
+              <option>6+ People</option>
+            </select>
+          </div>
+          <button class="btn-search" onclick="handleSearch()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18">
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.35-4.35" />
+            </svg>
+            Search
+          </button>
+        </div>
+      </div>
+      <div class="hero-stats reveal">
+        <div class="h-stat"><strong>500+</strong><span>Destinations</span></div>
+        <div class="h-stat-div"></div>
+        <div class="h-stat"><strong>250k+</strong><span>Happy Travelers</span></div>
+        <div class="h-stat-div"></div>
+        <div class="h-stat"><strong>4.9★</strong><span>Avg. Rating</span></div>
+      </div>
+    </div>
+    <div class="hero-scroll-cue">
+      <div class="scroll-mouse">
+        <div class="scroll-wheel"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEARCH RESULTS (shown dynamically) -->
+  <section class="search-results-section" id="searchResultsSection" style="display:none">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-tag">Search Results</span>
+        <h2>Results for <em id="searchQueryTitle"></em></h2>
+        <p id="searchResultsSubtitle">Showing matching destinations</p>
+      </div>
+      <div id="searchResultsGrid" class="search-results-grid"></div>
+      <div class="text-center" style="margin-top:32px">
+        <button class="btn-outline" onclick="closeSearch()">← Back to Home</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- THEMES -->
+  <section class="themes-section" id="themeSection">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-tag">Travel Moods</span>
+        <h2>Find Your <em>Vibe</em></h2>
+        <p>Filter destinations by the kind of adventure you're craving.</p>
+      </div>
+      <div class="theme-grid">
+        <div class="theme-card reveal" onclick="filterTheme('beach')" data-theme="beach">
+          <div class="theme-card-bg"
+            style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=700&q=80')">
+          </div>
+          <div class="theme-card-overlay"></div>
+          <div class="theme-card-body">
+            <div class="theme-card-icon">🏖️</div>
+            <h3>Beach</h3>
+            <p>Sun, sand & sea</p>
+          </div>
+        </div>
+        <div class="theme-card reveal" onclick="filterTheme('adventure')" data-theme="adventure"
+          style="transition-delay:.1s">
+          <div class="theme-card-bg"
+            style="background-image:url('https://images.unsplash.com/photo-1522163182402-834f871fd851?w=700&q=80')">
+          </div>
+          <div class="theme-card-overlay"></div>
+          <div class="theme-card-body">
+            <div class="theme-card-icon">🏔️</div>
+            <h3>Adventure</h3>
+            <p>Thrills & exploration</p>
+          </div>
+        </div>
+        <div class="theme-card reveal" onclick="filterTheme('winter')" data-theme="winter" style="transition-delay:.2s">
+          <div class="theme-card-bg"
+            style="background-image:url('https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=700&q=80')"></div>
+          <div class="theme-card-overlay"></div>
+          <div class="theme-card-body">
+            <div class="theme-card-icon">❄️</div>
+            <h3>Winter</h3>
+            <p>Snow & cozy escapes</p>
+          </div>
+        </div>
+        <div class="theme-card reveal" onclick="filterTheme('desert')" data-theme="desert" style="transition-delay:.3s">
+          <div class="theme-card-bg"
+            style="background-image:url('https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=700&q=80')">
+          </div>
+          <div class="theme-card-overlay"></div>
+          <div class="theme-card-body">
+            <div class="theme-card-icon">🏜️</div>
+            <h3>Desert</h3>
+            <p>Vast golden dunes</p>
+          </div>
+        </div>
+      </div>
+      <div id="themeResults" style="display:none">
+        <div class="section-head" style="margin-bottom:32px">
+          <h2 id="themeResultsTitle">Beach <em>Destinations</em></h2>
+        </div>
+        <div id="themeResultsGrid" class="dest-full-grid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED DESTINATIONS -->
+  <section class="section" id="destinations">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-tag">Top Picks</span>
+        <h2>Popular <em>Destinations</em></h2>
+        <p>Curated escapes that promise unforgettable memories — from ancient temples to turquoise lagoons.</p>
+      </div>
+      <div class="dest-grid">
+        <div class="dest-card dest-large reveal" onclick="openDestModal('maldives')">
+          <div class="dest-img"
+            style="background-image:url('https://images.unsplash.com/photo-1512100356356-de1b84283e18?w=900&q=80')">
+          </div>
+          <div class="dest-overlay"></div>
+          <div class="dest-body">
+            <span class="dest-label">🏆 Most Popular</span>
+            <h3>Maldives</h3>
+            <p class="dest-country">Indian Ocean</p>
+            <div class="dest-meta"><span>⭐ 5.0</span><span>From ₹1,85,000</span></div>
+          </div>
+          <a class="dest-explore" onclick="event.stopPropagation();openDestModal('maldives')">Explore →</a>
+        </div>
+        <div class="dest-card reveal" style="transition-delay:.08s" onclick="openDestModal('paris')">
+          <div class="dest-img"
+            style="background-image:url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=700&q=80')">
+          </div>
+          <div class="dest-overlay"></div>
+          <div class="dest-body">
+            <h3>Paris</h3>
+            <p class="dest-country">France</p>
+            <div class="dest-meta"><span>⭐ 4.8</span><span>From ₹82,000</span></div>
+          </div>
+          <a class="dest-explore">Explore →</a>
+        </div>
+        <div class="dest-card reveal" style="transition-delay:.16s" onclick="openDestModal('dubai')">
+          <div class="dest-img"
+            style="background-image:url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=700&q=80')">
+          </div>
+          <div class="dest-overlay"></div>
+          <div class="dest-body">
+            <h3>Dubai</h3>
+            <p class="dest-country">UAE</p>
+            <div class="dest-meta"><span>⭐ 4.9</span><span>From ₹65,000</span></div>
+          </div>
+          <a class="dest-explore">Explore →</a>
+        </div>
+        <div class="dest-card reveal" style="transition-delay:.24s" onclick="openDestModal('bali')">
+          <div class="dest-img"
+            style="background-image:url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=700&q=80')">
+          </div>
+          <div class="dest-overlay"></div>
+          <div class="dest-body">
+            <h3>Bali</h3>
+            <p class="dest-country">Indonesia</p>
+            <div class="dest-meta"><span>⭐ 4.9</span><span>From ₹55,000</span></div>
+          </div>
+          <a class="dest-explore">Explore →</a>
+        </div>
+        <div class="dest-card reveal" style="transition-delay:.32s" onclick="openDestModal('switzerland')">
+          <div class="dest-img"
+            style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=80')">
+          </div>
+          <div class="dest-overlay"></div>
+          <div class="dest-body">
+            <h3>Switzerland</h3>
+            <p class="dest-country">Europe</p>
+            <div class="dest-meta"><span>⭐ 4.9</span><span>From ₹1,25,000</span></div>
+          </div>
+          <a class="dest-explore">Explore →</a>
+        </div>
+      </div>
+      <div class="text-center reveal"><a href="Destination.html" class="btn-outline">View All Destinations →</a></div>
+    </div>
+  </section>
+
+  <!-- PACKAGES -->
+  <section class="section section-tinted">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-tag">Best Value</span>
+        <h2>Popular <em>Packages</em></h2>
+        <p>All-inclusive experiences designed by expert travel curators. Everything handled, nothing left to chance.</p>
+      </div>
+      <div class="pkg-grid">
+        <div class="pkg-card reveal">
+          <div class="pkg-img-wrap">
+            <div class="pkg-img"
+              style="background-image:url('https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?w=700&q=80')">
+            </div>
+            <div class="pkg-badge">Bestseller</div>
+          </div>
+          <div class="pkg-body">
+            <div class="pkg-loc">📍 Bali, Indonesia</div>
+            <h3>Tropical Paradise Escape</h3>
+            <div class="pkg-details"><span>🗓 7 Days</span><span>⭐ 4.9 (328)</span></div>
+            <div class="pkg-chips"><span>✈ Flights</span><span>🏨 Hotel</span><span>🍽 Meals</span></div>
+            <div class="pkg-footer">
+              <div class="pkg-price"><small>From</small>₹55,000</div>
+              <a href="Packages.html" class="btn-book">Book Now</a>
+            </div>
+          </div>
+        </div>
+        <div class="pkg-card reveal" style="transition-delay:.1s">
+          <div class="pkg-img-wrap">
+            <div class="pkg-img"
+              style="background-image:url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=700&q=80')">
+            </div>
+            <div class="pkg-badge pkg-gold">Hot Deal</div>
+          </div>
+          <div class="pkg-body">
+            <div class="pkg-loc">📍 Dubai, UAE</div>
+            <h3>Dubai Luxury Experience</h3>
+            <div class="pkg-details"><span>🗓 5 Days</span><span>⭐ 4.9 (412)</span></div>
+            <div class="pkg-chips"><span>✈ Flights</span><span>🏨 5-Star Hotel</span><span>🎭 Shows</span></div>
+            <div class="pkg-footer">
+              <div class="pkg-price"><small>From</small>₹65,000</div>
+              <a href="Packages.html" class="btn-book">Book Now</a>
+            </div>
+          </div>
+        </div>
+        <div class="pkg-card reveal" style="transition-delay:.2s">
+          <div class="pkg-img-wrap">
+            <div class="pkg-img"
+              style="background-image:url('https://images.unsplash.com/photo-1544550581-5f7ceaf7f992?w=700&q=80')">
+            </div>
+            <div class="pkg-badge pkg-coral">Honeymoon</div>
+          </div>
+          <div class="pkg-body">
+            <div class="pkg-loc">📍 Maldives</div>
+            <h3>Maldives Honeymoon Bliss</h3>
+            <div class="pkg-details"><span>🗓 6 Days</span><span>⭐ 5.0 (196)</span></div>
+            <div class="pkg-chips"><span>✈ Flights</span><span>🏝 Water Villa</span><span>🍽 All-Incl.</span></div>
+            <div class="pkg-footer">
+              <div class="pkg-price"><small>From</small>₹1,85,000</div>
+              <a href="Packages.html" class="btn-book">Book Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center reveal" style="margin-top:8px"><a href="Packages.html" class="btn-outline">View All 30
+          Packages →</a></div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="section">
+    <div class="why-bg-glow"></div>
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-tag">Our Promise</span>
+        <h2>Why <em>StayVenture</em>?</h2>
+        <p>We don't just book trips — we create transformative experiences that stay with you forever.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-card reveal">
+          <div class="why-icon">🌍</div>
+          <h3>500+ Destinations</h3>
+          <p>From hidden villages to iconic cities, our global network covers every corner of the earth.</p>
+        </div>
+        <div class="why-card reveal" style="transition-delay:.1s">
+          <div class="why-icon">🏆</div>
+          <h3>Award-Winning Service</h3>
+          <p>Voted #1 travel agency for 5 consecutive years. Our team works 24/7 for your perfect trip.</p>
+        </div>
+        <div class="why-card reveal" style="transition-delay:.2s">
+          <div class="why-icon">💎</div>
+          <h3>Luxury at Any Budget</h3>
+          <p>Curated premium experiences without the premium price tag. Best value guaranteed.</p>
+        </div>
+        <div class="why-card reveal" style="transition-delay:.3s">
+          <div class="why-icon">🛡️</div>
+          <h3>Travel Protection</h3>
+          <p>Comprehensive travel insurance and free cancellation on most bookings.</p>
+        </div>
+      </div>
+      <div class="counters-row reveal">
+        <div class="counter-item">
+          <div class="counter-val"><span class="c-num" data-target="500">0</span><span>+</span></div>
+          <p>Destinations</p>
+        </div>
+        <div class="counter-item">
+          <div class="counter-val"><span class="c-num" data-target="250">0</span><span>k</span></div>
+          <p>Happy Travelers</p>
+        </div>
+        <div class="counter-item">
+          <div class="counter-val"><span class="c-num" data-target="15">0</span><span>+</span></div>
+          <p>Years Experience</p>
+        </div>
+        <div class="counter-item">
+          <div class="counter-val"><span class="c-num" data-target="98">0</span><span>%</span></div>
+          <p>Satisfaction Rate</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="section section-tinted">
+    <div class="container">
+      <div class="section-head reveal"><span class="section-tag">Testimonials</span>
+        <h2>Travelers <em>Love Us</em></h2>
+      </div>
+      <div class="reviews-grid">
+        <div class="review-card reveal">
+          <div class="r-stars">⭐⭐⭐⭐⭐</div>
+          <p>"Absolutely life-changing! The Bali package was perfectly organized — every detail handled with care.
+            Already planning my next trip with StayVenture!"</p>
+          <div class="r-author">
+            <div class="r-avatar" style="--ac1:#f97316;--ac2:#ec4899">S</div>
+            <div><strong>Sarah Mitchell</strong><span>New York, USA</span></div>
+          </div>
+        </div>
+        <div class="review-card reveal" style="transition-delay:.1s">
+          <div class="r-stars">⭐⭐⭐⭐⭐</div>
+          <p>"The Maldives honeymoon was a masterpiece. Every detail was perfect. The water villa exceeded all
+            expectations. Pure paradise — 10/10!"</p>
+          <div class="r-author">
+            <div class="r-avatar" style="--ac1:#0ea5e9;--ac2:#06b6d4">J</div>
+            <div><strong>Arjun & Priya</strong><span>Chennai, India</span></div>
+          </div>
+        </div>
+        <div class="review-card reveal" style="transition-delay:.2s">
+          <div class="r-stars">⭐⭐⭐⭐⭐</div>
+          <p>"From the moment I booked, the team was incredibly helpful. The Dubai experience exceeded every
+            expectation. Thank you StayVenture!"</p>
+          <div class="r-author">
+            <div class="r-avatar" style="--ac1:#22c55e;--ac2:#10b981">A</div>
+            <div><strong>Amira Hassan</strong><span>Dubai, UAE</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-bg-img"
+      style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600&q=80')"></div>
+    <div class="cta-overlay"></div>
+    <div class="container">
+      <div class="cta-inner reveal">
+        <div class="cta-tag">✦ Limited Time Offer</div>
+        <h2>Your Dream Journey<br /><em>Starts Today</em></h2>
+        <p>Book any package this month and save up to 30%. Adventure is calling — answer it.</p>
+        <div class="cta-btns">
+          <a href="Packages.html" class="btn-cta-primary">Explore Packages</a>
+          <a href="contact.html" class="btn-cta-ghost">Talk to an Expert</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo"><span class="logo-icon">✦</span><span>StayVenture</span></a>
+          <p>Creating extraordinary travel experiences since 2009. Based in Coimbatore, India. Your journey, perfectly
+            crafted.</p>
+          <div class="social-row"><a href="#" class="soc">📸</a><a href="#" class="soc">🐦</a><a href="#"
+              class="soc">📘</a><a href="#" class="soc">▶️</a></div>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4><a href="Destination.html">Destinations</a><a href="Packages.html">Packages</a><a
+            href="Destination.html">Travel Guides</a><a href="contact.html">Blog</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4><a href="contact.html">About Us</a><a href="contact.html">Contact</a><a href="#">Careers</a><a
+            href="#">Press</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4><a href="tel:8870460519">📞 8870460519</a><a href="mailto:auranookhomes@gmail.com">📧
+            auranookhomes@gmail.com</a><a href="#">📍 Coimbatore, India</a><a href="#">Help Center</a>
+        </div>
+      </div>
+      <div class="footer-bottom"><span>© 2025 StayVenture Travel Agency. All rights reserved.</span><span>Made with ❤️
+          in Coimbatore, India</span></div>
+    </div>
+  </footer>
+
+  <!-- DESTINATION DETAIL MODAL -->
+  <div class="modal-overlay" id="destModal">
+    <div class="modal-box" id="destModalBox">
+      <div class="modal-hero" id="modalHero">
+        <div class="modal-hero-overlay"></div>
+        <div class="modal-hero-title">
+          <h2 id="modalTitle">Destination</h2>
+          <p id="modalCountry"></p>
+        </div>
+        <button class="modal-close" onclick="closeModal('destModal')">✕</button>
+      </div>
+      <div class="modal-content">
+        <div class="modal-section">
+          <p id="modalDesc" style="color:var(--text-mid);line-height:1.7"></p>
+        </div>
+        <div class="modal-section">
+          <h4>🏛 Top Attractions</h4>
+          <div class="modal-tags" id="modalAttractions"></div>
+        </div>
+        <div class="modal-section">
+          <h4>🎯 Recommended Activities</h4>
+          <div class="modal-tags" id="modalActivities"></div>
+        </div>
+        <div class="modal-section">
+          <h4>📅 Tour Itinerary</h4>
+          <div class="modal-itinerary" id="modalItinerary"></div>
+        </div>
+        <div class="modal-section">
+          <h4>🏨 Hotel Suggestions</h4>
+          <div class="modal-tags" id="modalHotels"></div>
+        </div>
+        <div class="modal-section">
+          <h4>💰 Estimated Cost</h4>
+          <div class="modal-cost-grid" id="modalCosts"></div>
+          <div class="modal-total"><span class="t-label">Total Package (per person)</span><span class="t-price"
+              id="modalTotal">₹0</span></div>
+        </div>
+        <div class="modal-actions">
+          <button class="btn-primary" onclick="bookDestination()">Book Now →</button>
+          <button class="btn-wishlist" id="modalWishlistBtn" onclick="toggleWishlistModal()">🤍</button>
+          <button class="btn-secondary" onclick="closeModal('destModal')">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHATBOT -->
+  <div class="chatbot-widget">
+    <div class="chat-panel" id="chatPanel">
+      <div class="chat-header">
+        <div class="chat-avatar">🤖</div>
+        <div class="chat-header-info"><strong>Ventura AI</strong><span>🟢 Online — Travel Assistant</span></div>
+        <div class="chat-header-actions">
+          <button class="chat-action-btn" onclick="toggleCallback()" title="Get a Call Back">📞</button>
+          <button class="chat-action-btn" onclick="closeChatbot()">✕</button>
+        </div>
+      </div>
+      <div class="chat-messages" id="chatMessages"></div>
+      <div class="chat-quick-btns" id="chatQuickBtns">
+        <button class="chat-quick-btn" onclick="sendQuick('View packages')">View Packages</button>
+        <button class="chat-quick-btn" onclick="sendQuick('Honeymoon destinations')">Honeymoon</button>
+        <button class="chat-quick-btn" onclick="sendQuick('Visa free trips')">Visa Free</button>
+        <button class="chat-quick-btn" onclick="sendQuick('Best budget trips')">Budget Trips</button>
+      </div>
+      <div class="chat-input-row">
+        <input class="chat-input" id="chatInput" placeholder="Ask me anything about travel..."
+          onkeypress="if(event.key==='Enter')sendMessage()" />
+        <button class="chat-send-btn" onclick="sendMessage()">➤</button>
+      </div>
+      <div class="callback-form" id="callbackForm">
+        <h4>📞 Request a Call Back</h4>
+        <input class="callback-input" id="callbackName" placeholder="Your Name" />
+        <input class="callback-input" id="callbackPhone" placeholder="Your Phone Number" />
+        <input class="callback-input" id="callbackTime" placeholder="Preferred Time (e.g. 10am-12pm)" />
+        <button class="btn-callback" onclick="submitCallback()">Request Call Back</button>
+      </div>
+    </div>
+    <button class="chat-toggle-btn" onclick="toggleChatbot()">
+      💬<span class="chat-badge" id="chatBadge">1</span>
+    </button>
+  </div>
+
+  <!-- GLOBAL TOAST -->
+  <div class="global-toast" id="globalToast"></div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

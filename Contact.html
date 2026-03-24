@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact — StayVenture</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+<nav class="navbar navbar-solid" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><span class="logo-icon">✦</span><span>StayVenture</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li><li><a href="Destination.html">Destinations</a></li>
+      <li><a href="Packages.html">Packages</a></li><li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+    <div class="nav-auth" id="navAuth">
+      <a href="Login.html" class="btn-nav-ghost">Sign In</a>
+      <a href="Signup.html" class="btn-nav-fill">Get Started</a>
+    </div>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="page-hero" style="background-image:url('https://images.unsplash.com/photo-1488085061387-422e29b40080?w=1600&q=80')">
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content reveal">
+    <span class="section-tag">Get In Touch</span>
+    <h1>Contact <em>Us</em></h1>
+    <p>We're here to help you plan the perfect journey.</p>
+  </div>
+</div>
+<div class="contact-layout">
+  <div class="contact-info reveal">
+    <h2>Let's Plan Your <em>Dream Trip</em></h2>
+    <p>Our travel experts are available 7 days a week to help you craft the perfect itinerary. Reach out and we'll get back to you within 2 hours.</p>
+    <div class="contact-items">
+      <div class="contact-item"><div class="ci-icon">📞</div><div class="ci-body"><strong>Phone</strong><span>8870460519</span></div></div>
+      <div class="contact-item"><div class="ci-icon">📧</div><div class="ci-body"><strong>Email</strong><span>auranookhomes@gmail.com</span></div></div>
+      <div class="contact-item"><div class="ci-icon">📍</div><div class="ci-body"><strong>Office</strong><span>Coimbatore, Tamil Nadu, India</span></div></div>
+      <div class="contact-item"><div class="ci-icon">🕐</div><div class="ci-body"><strong>Working Hours</strong><span>Mon–Sun: 9:00 AM – 9:00 PM IST</span></div></div>
+    </div>
+    <div class="map-placeholder"><span>📍</span><p>Coimbatore, Tamil Nadu, India</p></div>
+  </div>
+  <div class="contact-form-card reveal">
+    <h3>Send Us a <em>Message</em></h3>
+    <div id="contactToast" class="toast" style="display:none"></div>
+    <div class="form-row">
+      <div class="form-group"><label>First Name</label><input type="text" id="cFirstName" placeholder="John"/></div>
+      <div class="form-group"><label>Last Name</label><input type="text" id="cLastName" placeholder="Doe"/></div>
+    </div>
+    <div class="form-group"><label>Email</label><input type="email" id="cEmail" placeholder="john@example.com"/></div>
+    <div class="form-group"><label>Phone</label><input type="tel" id="cPhone" placeholder="+91 98765 43210"/></div>
+    <div class="form-group">
+      <label>Interested In</label>
+      <select id="cInterest">
+        <option>Honeymoon Packages</option><option>Group Trips</option><option>Family Vacation</option>
+        <option>Adventure Tours</option><option>Luxury Travel</option><option>Budget Travel</option><option>Custom Itinerary</option>
+      </select>
+    </div>
+    <div class="form-group"><label>Message</label><textarea id="cMessage" rows="4" placeholder="Tell us about your dream trip..."></textarea></div>
+    <button class="btn-primary" style="width:100%;padding:16px" onclick="submitContact()">Send Message ✈️</button>
+  </div>
+</div>
+<div class="chatbot-widget">
+  <div class="chat-panel" id="chatPanel">
+    <div class="chat-header">
+      <div class="chat-avatar">🤖</div>
+      <div class="chat-header-info"><strong>Ventura AI</strong><span>🟢 Online</span></div>
+      <div class="chat-header-actions"><button class="chat-action-btn" onclick="toggleCallback()">📞</button><button class="chat-action-btn" onclick="closeChatbot()">✕</button></div>
+    </div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-input-row">
+      <input class="chat-input" id="chatInput" placeholder="Ask us anything..." onkeypress="if(event.key==='Enter')sendMessage()"/>
+      <button class="chat-send-btn" onclick="sendMessage()">➤</button>
+    </div>
+    <div class="callback-form" id="callbackForm">
+      <h4>📞 Request a Call Back</h4>
+      <input class="callback-input" id="callbackName" placeholder="Your Name"/>
+      <input class="callback-input" id="callbackPhone" placeholder="Phone Number"/>
+      <button class="btn-callback" onclick="submitCallback()">Request Call Back</button>
+    </div>
+  </div>
+  <button class="chat-toggle-btn" onclick="toggleChatbot()">💬<span class="chat-badge">1</span></button>
+</div>
+<div class="global-toast" id="globalToast"></div>
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo"><span class="logo-icon">✦</span><span>StayVenture</span></a>
+        <p>Creating extraordinary travel experiences since 2009.</p>
+        <div class="social-row"><a href="#" class="soc">📸</a><a href="#" class="soc">🐦</a><a href="#" class="soc">📘</a></div>
+      </div>
+      <div class="footer-col"><h4>Explore</h4><a href="Destination.html">Destinations</a><a href="Packages.html">Packages</a></div>
+      <div class="footer-col"><h4>Contact</h4><a href="tel:8870460519">📞 8870460519</a><a href="mailto:auranookhomes@gmail.com">📧 Email</a><a>📍 Coimbatore</a></div>
+      <div class="footer-col"><h4>Support</h4><a href="#">Help Center</a><a href="#">Cancellation</a></div>
+    </div>
+    <div class="footer-bottom"><span>© 2025 StayVenture Travel Agency.</span><span>Made with ❤️ in Coimbatore</span></div>
+  </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

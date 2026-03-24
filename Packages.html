@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Packages — StayVenture</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+<nav class="navbar navbar-solid" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><span class="logo-icon">✦</span><span>StayVenture</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="Destination.html">Destinations</a></li>
+      <li><a href="Packages.html" class="active">Packages</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-auth" id="navAuth">
+      <a href="Login.html" class="btn-nav-ghost">Sign In</a>
+      <a href="Signup.html" class="btn-nav-fill">Get Started</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- FULL-SCREEN HERO BANNER WITH TRAVEL BG -->
+<div class="pkg-hero-banner">
+  <div class="pkg-hero-banner-content">
+    <span class="section-tag" style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(8px)">✦ All-Inclusive Packages</span>
+    <h1 style="margin-top:16px;color:#fff">Tour <em>Packages</em></h1>
+    <p>Handcrafted journeys for every kind of traveler — honeymoons, group adventures, luxury escapes &amp; more.</p>
+    <div class="pkg-stats-bar">
+      <div class="pkg-stat"><strong>30+</strong><span>Packages</span></div>
+      <div class="pkg-stat"><strong>7</strong><span>Categories</span></div>
+      <div class="pkg-stat"><strong>₹12k–₹4.5L</strong><span>Price Range</span></div>
+      <div class="pkg-stat"><strong>4.8★</strong><span>Avg Rating</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- FULL-SCREEN PACKAGES SECTION -->
+<div class="pkg-main-section">
+  <div class="pkg-wide-container">
+    <div class="section-head reveal" style="margin-bottom:0;padding-bottom:24px">
+      <span class="section-tag">Choose Your Adventure</span>
+      <h2 style="margin-top:8px">All <em>Packages</em></h2>
+      <p>Every package includes flights, accommodation, guided tours, and 24/7 support.</p>
+    </div>
+
+    <!-- STICKY CATEGORY TABS -->
+    <div class="pkg-cat-strip" id="catTabs">
+      <button class="cat-tab active" onclick="filterPkgsFullscreen('all', this)">🌍 All Packages</button>
+      <button class="cat-tab" onclick="filterPkgsFullscreen('honeymoon', this)">💕 Honeymoon</button>
+      <button class="cat-tab" onclick="filterPkgsFullscreen('visafree', this)">✈️ Visa Free</button>
+      <button class="cat-tab" onclick="filterPkgsFullscreen('group', this)">👥 Group Trips</button>
+      <button class="cat-tab" onclick="filterPkgsFullscreen('cruise', this)">🚢 Disney Cruise</button>
+      <button class="cat-tab" onclick="filterPkgsFullscreen('northindia', this)">🏔 North India</button>
+      <button class="cat-tab" onclick="filterPkgsFullscreen('lastminute', this)">⚡ Last Minute</button>
+      <button class="cat-tab" onclick="filterPkgsFullscreen('premium', this)">💎 Premium</button>
+    </div>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;margin:24px 0 20px;flex-wrap:wrap;gap:8px">
+      <p id="pkgCountLabel" style="color:var(--text-mid);font-size:.9rem">Showing <strong id="pkgCount">30</strong> packages</p>
+      <select id="pkgSortSelect" onchange="sortPackages()" style="padding:8px 16px;border:1.5px solid var(--border);border-radius:10px;background:var(--surface);color:var(--text-mid);font-size:.85rem;cursor:pointer">
+        <option value="default">Sort: Default</option>
+        <option value="priceLow">Price: Low to High</option>
+        <option value="priceHigh">Price: High to Low</option>
+        <option value="rating">Top Rated</option>
+      </select>
+    </div>
+
+    <!-- 4-COLUMN RESPONSIVE GRID -->
+    <div class="pkg-grid-full" id="pkgGrid"></div>
+  </div>
+</div>
+
+<!-- PACKAGE DETAIL MODAL -->
+<div class="modal-overlay" id="pkgModal">
+  <div class="modal-box" style="max-width:960px">
+    <div class="modal-hero" id="pkgModalHero">
+      <div class="modal-hero-overlay"></div>
+      <div class="modal-hero-title">
+        <h2 id="pkgModalTitle"></h2>
+        <p id="pkgModalLoc"></p>
+      </div>
+      <button class="modal-close" onclick="closeModal('pkgModal')">✕</button>
+    </div>
+    <div class="modal-content">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px" id="pkgCostBreakdown"></div>
+      <div class="modal-section"><h4>📝 Package Overview</h4><p id="pkgDesc" style="color:var(--text-mid);line-height:1.7"></p></div>
+      <div class="modal-section"><h4>🍽 Food Arrangements</h4><div class="modal-tags" id="pkgFood"></div></div>
+      <div class="modal-section"><h4>📍 Visiting Places</h4><div class="modal-tags" id="pkgPlaces"></div></div>
+      <div class="modal-section">
+        <h4>🏨 Recommended Hotels</h4>
+        <div class="dest-hotel-strip" id="pkgModalHotels"></div>
+      </div>
+      <div class="modal-section"><h4>📅 Daily Itinerary</h4><div class="modal-itinerary" id="pkgItinerary"></div></div>
+      <div class="modal-total" style="margin-bottom:0"><span class="t-label">Total Package Cost (per person)</span><span class="t-price" id="pkgTotal"></span></div>
+      <div class="modal-actions" style="margin-top:16px">
+        <button class="btn-primary" onclick="bookPackage()">Book This Package →</button>
+        <button class="btn-secondary" onclick="closeModal('pkgModal')">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CHATBOT -->
+<div class="chatbot-widget">
+  <div class="chat-panel" id="chatPanel">
+    <div class="chat-header">
+      <div class="chat-avatar">🤖</div>
+      <div class="chat-header-info"><strong>Ventura AI</strong><span>🟢 Online</span></div>
+      <div class="chat-header-actions"><button class="chat-action-btn" onclick="toggleCallback()">📞</button><button class="chat-action-btn" onclick="closeChatbot()">✕</button></div>
+    </div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-quick-btns">
+      <button class="chat-quick-btn" onclick="sendQuick('Honeymoon packages')">Honeymoon</button>
+      <button class="chat-quick-btn" onclick="sendQuick('Budget packages under 50000')">Budget</button>
+    </div>
+    <div class="chat-input-row">
+      <input class="chat-input" id="chatInput" placeholder="Ask about packages..." onkeypress="if(event.key==='Enter')sendMessage()"/>
+      <button class="chat-send-btn" onclick="sendMessage()">➤</button>
+    </div>
+    <div class="callback-form" id="callbackForm">
+      <h4>📞 Request a Call Back</h4>
+      <input class="callback-input" id="callbackName" placeholder="Your Name"/>
+      <input class="callback-input" id="callbackPhone" placeholder="Phone Number"/>
+      <button class="btn-callback" onclick="submitCallback()">Request Call Back</button>
+    </div>
+  </div>
+  <button class="chat-toggle-btn" onclick="toggleChatbot()">💬<span class="chat-badge">1</span></button>
+</div>
+
+<div class="global-toast" id="globalToast"></div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo"><span class="logo-icon">✦</span><span>StayVenture</span></a>
+        <p>Creating extraordinary travel experiences since 2009.</p>
+        <div class="social-row"><a href="#" class="soc">📸</a><a href="#" class="soc">🐦</a><a href="#" class="soc">📘</a></div>
+      </div>
+      <div class="footer-col"><h4>Explore</h4><a href="Destination.html">Destinations</a><a href="Packages.html">Packages</a><a href="contact.html">Contact</a></div>
+      <div class="footer-col"><h4>Contact</h4><a href="tel:8870460519">📞 8870460519</a><a href="mailto:auranookhomes@gmail.com">📧 Email Us</a><a>📍 Coimbatore, India</a></div>
+      <div class="footer-col"><h4>Support</h4><a href="#">Help Center</a><a href="#">Cancellation</a><a href="#">Privacy Policy</a></div>
+    </div>
+    <div class="footer-bottom"><span>© 2025 StayVenture Travel Agency.</span><span>Made with ❤️ in India</span></div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Dashboard — StayVenture</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+<nav class="navbar navbar-solid" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><span class="logo-icon">✦</span><span>StayVenture</span></a>
+    <div class="nav-auth" id="navAuth">
+      <a href="Destination.html" class="btn-nav-ghost">Explore</a>
+      <button class="btn-nav-fill" onclick="handleLogout()">Logout</button>
+    </div>
+  </div>
+</nav>
+<div class="dashboard-layout">
+  <!-- Sidebar -->
+  <aside class="dash-sidebar">
+    <div class="dash-avatar" id="dashAvatar">U</div>
+    <div class="dash-user-name" id="dashName">Traveler</div>
+    <div class="dash-user-email" id="dashEmail">user@email.com</div>
+    <nav class="dash-nav">
+      <div class="dash-nav-item active" onclick="showSection('overview',this)"><span class="dash-nav-icon">🏠</span>My Dashboard</div>
+      <div class="dash-nav-item" onclick="showSection('bookings',this)"><span class="dash-nav-icon">🧳</span>My Bookings</div>
+      <div class="dash-nav-item" onclick="showSection('wishlist',this)"><span class="dash-nav-icon">❤️</span>Wishlist</div>
+      <div class="dash-nav-item" onclick="showSection('premium',this)"><span class="dash-nav-icon">💎</span>Premium Packages</div>
+      <div class="dash-nav-divider"></div>
+      <div class="dash-nav-item" onclick="showSection('profile',this)"><span class="dash-nav-icon">👤</span>Profile</div>
+      <div class="dash-nav-item" onclick="handleLogout()"><span class="dash-nav-icon">🚪</span>Logout</div>
+    </nav>
+  </aside>
+  <!-- Main -->
+  <main class="dash-main">
+    <!-- OVERVIEW -->
+    <div class="dash-section active" id="sec-overview">
+      <h2 class="dash-heading">Welcome back, <em id="welcomeName">Traveler</em>! ✈️</h2>
+      <p class="dash-subheading">Here's a summary of your travel journey</p>
+      <div class="dash-stats">
+        <div class="ds-card"><div class="ds-card-icon">🧳</div><div class="ds-card-val" id="statTrips">3</div><div class="ds-card-label">Trips Taken</div></div>
+        <div class="ds-card"><div class="ds-card-icon">🌍</div><div class="ds-card-val" id="statDest">5</div><div class="ds-card-label">Destinations</div></div>
+        <div class="ds-card"><div class="ds-card-icon">❤️</div><div class="ds-card-val" id="statWish">4</div><div class="ds-card-label">Wishlist Items</div></div>
+        <div class="ds-card"><div class="ds-card-icon">⭐</div><div class="ds-card-val">4.9</div><div class="ds-card-label">Avg. Rating Given</div></div>
+      </div>
+      <h3 style="margin-bottom:16px;font-size:1.1rem">Recent Bookings</h3>
+      <div id="overviewBookings"></div>
+      <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
+        <a href="Destination.html" class="btn-primary" style="padding:12px 24px;text-decoration:none;border-radius:12px;font-weight:700;font-size:.9rem">🌍 Explore Destinations</a>
+        <a href="Packages.html" class="btn-secondary" style="padding:12px 24px;text-decoration:none;border-radius:12px;border:1.5px solid var(--border);color:var(--text-mid);font-weight:600;font-size:.9rem">💎 View Packages</a>
+      </div>
+    </div>
+    <!-- BOOKINGS -->
+    <div class="dash-section" id="sec-bookings">
+      <h2 class="dash-heading">My <em>Bookings</em></h2>
+      <p class="dash-subheading">All your past and upcoming trips</p>
+      <div id="allBookingsList"></div>
+    </div>
+    <!-- WISHLIST -->
+    <div class="dash-section" id="sec-wishlist">
+      <h2 class="dash-heading">My <em>Wishlist</em></h2>
+      <p class="dash-subheading">Destinations you're dreaming about</p>
+      <div class="wishlist-grid" id="wishlistGrid"></div>
+    </div>
+    <!-- PREMIUM -->
+    <div class="dash-section" id="sec-premium">
+      <h2 class="dash-heading">Premium <em>Packages</em></h2>
+      <p class="dash-subheading">Exclusive experiences for discerning travelers</p>
+      <div class="full-pkg-grid" id="premiumGrid"></div>
+    </div>
+    <!-- PROFILE -->
+    <div class="dash-section" id="sec-profile">
+      <h2 class="dash-heading">My <em>Profile</em></h2>
+      <p class="dash-subheading">Manage your account details</p>
+      <div style="max-width:520px">
+        <div class="booking-form-card" style="padding:32px">
+          <div class="form-row">
+            <div class="form-group"><label>First Name</label><input type="text" id="profFirst" placeholder="First Name"/></div>
+            <div class="form-group"><label>Last Name</label><input type="text" id="profLast" placeholder="Last Name"/></div>
+          </div>
+          <div class="form-group"><label>Email</label><input type="email" id="profEmail" placeholder="email@example.com"/></div>
+          <div class="form-group"><label>Phone</label><input type="tel" id="profPhone" placeholder="+91 98765 43210"/></div>
+          <button class="btn-primary" style="width:100%;padding:14px" onclick="saveProfile()">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<div class="global-toast" id="globalToast"></div>
+<script src="script.js"></script>
+</body>
+</html>

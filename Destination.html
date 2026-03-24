@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Destinations — StayVenture</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+<nav class="navbar navbar-solid" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><span class="logo-icon">✦</span><span>StayVenture</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="Destination.html" class="active">Destinations</a></li>
+      <li><a href="Packages.html">Packages</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-auth" id="navAuth">
+      <a href="Login.html" class="btn-nav-ghost">Sign In</a>
+      <a href="Signup.html" class="btn-nav-fill">Get Started</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero" style="background-image:url('https://images.unsplash.com/photo-1488085061387-422e29b40080?w=1920&q=80')">
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content reveal">
+    <span class="section-tag">World Destinations</span>
+    <h1>Explore <em>Destinations</em></h1>
+    <p>20 extraordinary places waiting for you — from beaches to mountains to deserts.</p>
+  </div>
+</div>
+
+<!-- ════ RECOMMENDED FOR YOU ════ -->
+<section class="rec-pref-section">
+  <div class="container">
+    <div class="section-head reveal" style="margin-bottom:0">
+      <span class="section-tag">✨ Personalise</span>
+      <h2 style="margin-top:8px">Recommended <em>For You</em></h2>
+      <p>Select your travel preference and we'll show the best destinations for you.</p>
+    </div>
+    <div class="rec-pref-row" id="recPrefRow">
+      <button class="rec-pref-btn active" onclick="setPreference('all', this)">🌍 All</button>
+      <button class="rec-pref-btn" onclick="setPreference('beach', this)">🏖 Beach</button>
+      <button class="rec-pref-btn" onclick="setPreference('adventure', this)">🏔 Adventure</button>
+      <button class="rec-pref-btn" onclick="setPreference('winter', this)">❄️ Winter</button>
+      <button class="rec-pref-btn" onclick="setPreference('desert', this)">🏜 Desert</button>
+      <button class="rec-pref-btn" onclick="setPreference('cultural', this)">🏛 Cultural</button>
+      <button class="rec-pref-btn" onclick="setPreference('honeymoon', this)">💕 Luxury</button>
+    </div>
+  </div>
+</section>
+
+<!-- RECOMMENDATION RESULTS -->
+<section class="rec-results-section" id="recResultsSection">
+  <div class="container">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:10px">
+      <h3 id="recResultsTitle" style="font-family:var(--font-display);font-size:1.3rem">All <em>Destinations</em></h3>
+      <span id="recResultsCount" style="color:var(--text-dim);font-size:.85rem">20 destinations</span>
+    </div>
+    <div class="rec-dest-strip" id="recDestGrid"></div>
+  </div>
+</section>
+
+<!-- ════ MAIN DESTINATIONS GRID ════ -->
+<section class="section section-tinted">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-tag">Filter &amp; Explore</span>
+      <h2>All <em>Destinations</em></h2>
+    </div>
+    <div class="dest-filter-bar">
+      <button class="dest-filter-btn active" onclick="filterDest('all', this)">🌍 All</button>
+      <button class="dest-filter-btn" onclick="filterDest('beach', this)">🏖 Beach</button>
+      <button class="dest-filter-btn" onclick="filterDest('adventure', this)">🏔 Adventure</button>
+      <button class="dest-filter-btn" onclick="filterDest('winter', this)">❄️ Winter</button>
+      <button class="dest-filter-btn" onclick="filterDest('desert', this)">🏜 Desert</button>
+      <button class="dest-filter-btn" onclick="filterDest('cultural', this)">🏛 Cultural</button>
+      <button class="dest-filter-btn" onclick="filterDest('honeymoon', this)">💕 Honeymoon</button>
+    </div>
+    <div class="dest-full-grid" id="destGrid"></div>
+    <div class="text-center reveal" style="margin-top:16px">
+      <p style="color:var(--text-dim);font-size:.9rem">Can't find your destination? <button class="btn-outline" style="margin-left:10px" onclick="searchGemini()">✨ Search with AI</button></p>
+    </div>
+  </div>
+</section>
+
+<!-- ════ DESTINATION FULL PAGE DETAIL (slides up) ════ -->
+<div id="destDetailPage">
+  <!-- Back button -->
+  <button class="dest-detail-back" onclick="closeDestDetailPage()">← Back to Destinations</button>
+
+  <!-- Hero -->
+  <div class="dest-detail-hero" id="ddHero">
+    <div class="dest-detail-hero-content">
+      <div id="ddTag" style="margin-bottom:12px"></div>
+      <h1 id="ddTitle">Destination <em id="ddName"></em></h1>
+      <p id="ddCountry" style="opacity:.75;font-size:1rem;margin-bottom:4px"></p>
+      <p id="ddDesc" style="max-width:680px;margin-bottom:0"></p>
+      <div class="dest-detail-hero-actions">
+        <button class="btn-book-hero" onclick="bookFromDetail()">✈️ Book Now</button>
+        <button class="btn-wish-hero" onclick="toggleWishFromDetail()" id="ddWishBtn">🤍 Wishlist</button>
+        <button class="btn-wish-hero" onclick="closeDestDetailPage()">← Back</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="dest-detail-content">
+    <div class="dest-detail-grid">
+      <!-- LEFT COLUMN -->
+      <div>
+        <!-- Attractions -->
+        <div class="dest-detail-section">
+          <h3>🏛 Top Attractions</h3>
+          <div class="dest-attraction-list" id="ddAttractions"></div>
+        </div>
+        <!-- Activities -->
+        <div class="dest-detail-section">
+          <h3>🎯 Recommended Activities</h3>
+          <div class="dest-activity-grid" id="ddActivities"></div>
+        </div>
+        <!-- Restaurants -->
+        <div class="dest-detail-section">
+          <h3>🍽 Recommended Restaurants</h3>
+          <div class="dest-restaurant-list" id="ddRestaurants"></div>
+        </div>
+        <!-- Travel Plan -->
+        <div class="dest-detail-section">
+          <h3>📅 Recommended Travel Plan</h3>
+          <div class="dest-itinerary-list" id="ddItinerary"></div>
+        </div>
+      </div>
+
+      <!-- RIGHT SIDEBAR -->
+      <div>
+        <!-- Estimated Cost -->
+        <div class="dest-sidebar-card">
+          <h4>💰 Estimated Cost</h4>
+          <div id="ddCosts"></div>
+          <div class="dest-total-cost" id="ddTotal">
+            <span>Total per person</span>
+            <strong id="ddTotalVal">₹0</strong>
+          </div>
+          <button class="btn-primary" style="width:100%;margin-top:16px;padding:14px" onclick="bookFromDetail()">Book Now →</button>
+        </div>
+
+        <!-- Hotels -->
+        <div class="dest-sidebar-card">
+          <h4>🏨 Recommended Hotels</h4>
+          <div class="dest-hotel-list" id="ddHotels"></div>
+        </div>
+
+        <!-- Quick Info -->
+        <div class="dest-sidebar-card" id="ddQuickInfo">
+          <h4>ℹ️ Quick Info</h4>
+          <div id="ddQuickInfoContent"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- OLD MODAL (kept for homepage compatibility) -->
+<div class="modal-overlay" id="destModal">
+  <div class="modal-box">
+    <div class="modal-hero" id="modalHero">
+      <div class="modal-hero-overlay"></div>
+      <div class="modal-hero-title"><h2 id="modalTitle">Destination</h2><p id="modalCountry"></p></div>
+      <button class="modal-close" onclick="closeModal('destModal')">✕</button>
+    </div>
+    <div class="modal-content">
+      <div class="modal-section"><p id="modalDesc" style="color:var(--text-mid);line-height:1.7"></p></div>
+      <div class="modal-section"><h4>🏛 Top Attractions</h4><div class="modal-tags" id="modalAttractions"></div></div>
+      <div class="modal-section"><h4>🎯 Recommended Activities</h4><div class="modal-tags" id="modalActivities"></div></div>
+      <div class="modal-section"><h4>📅 Tour Itinerary</h4><div class="modal-itinerary" id="modalItinerary"></div></div>
+      <div class="modal-section"><h4>🏨 Hotel Suggestions</h4><div class="modal-tags" id="modalHotels"></div></div>
+      <div class="modal-section">
+        <h4>💰 Estimated Cost</h4>
+        <div class="modal-cost-grid" id="modalCosts"></div>
+        <div class="modal-total"><span class="t-label">Total Package (per person)</span><span class="t-price" id="modalTotal">₹0</span></div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-primary" onclick="bookDestination()">Book Now →</button>
+        <button class="btn-wishlist" id="modalWishlistBtn" onclick="toggleWishlistModal()">🤍</button>
+        <button class="btn-secondary" onclick="closeModal('destModal')">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AI SEARCH MODAL -->
+<div class="modal-overlay" id="aiSearchModal">
+  <div class="modal-box" style="max-width:520px">
+    <div style="padding:32px">
+      <button class="modal-close" style="position:absolute;top:16px;right:16px;background:var(--border)" onclick="closeModal('aiSearchModal')">✕</button>
+      <div style="margin-bottom:20px">
+        <span class="section-tag">✨ AI Search</span>
+        <h2 style="margin-top:8px">Search Any <em>Destination</em></h2>
+        <p style="color:var(--text-mid);margin-top:8px">Powered by Gemini AI — discover any place on earth</p>
+      </div>
+      <div class="form-group">
+        <label>Destination Name</label>
+        <input type="text" id="aiSearchInput" placeholder="e.g. Cappadocia, Patagonia, Bhutan..." style="width:100%;padding:14px 18px;border:1.5px solid var(--border);border-radius:14px;font-size:.95rem;outline:none"/>
+      </div>
+      <button class="btn-primary" style="width:100%;margin-top:8px" onclick="searchGeminiDest()">✨ Search with AI</button>
+      <div id="aiSearchResult" style="margin-top:20px"></div>
+    </div>
+  </div>
+</div>
+
+<!-- CHATBOT -->
+<div class="chatbot-widget">
+  <div class="chat-panel" id="chatPanel">
+    <div class="chat-header">
+      <div class="chat-avatar">🤖</div>
+      <div class="chat-header-info"><strong>Ventura AI</strong><span>🟢 Online</span></div>
+      <div class="chat-header-actions"><button class="chat-action-btn" onclick="toggleCallback()">📞</button><button class="chat-action-btn" onclick="closeChatbot()">✕</button></div>
+    </div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-quick-btns">
+      <button class="chat-quick-btn" onclick="sendQuick('Best beach destinations')">Beaches</button>
+      <button class="chat-quick-btn" onclick="sendQuick('Honeymoon destinations')">Honeymoon</button>
+    </div>
+    <div class="chat-input-row">
+      <input class="chat-input" id="chatInput" placeholder="Ask about destinations..." onkeypress="if(event.key==='Enter')sendMessage()"/>
+      <button class="chat-send-btn" onclick="sendMessage()">➤</button>
+    </div>
+    <div class="callback-form" id="callbackForm">
+      <h4>📞 Request a Call Back</h4>
+      <input class="callback-input" id="callbackName" placeholder="Your Name"/>
+      <input class="callback-input" id="callbackPhone" placeholder="Phone Number"/>
+      <button class="btn-callback" onclick="submitCallback()">Request Call Back</button>
+    </div>
+  </div>
+  <button class="chat-toggle-btn" onclick="toggleChatbot()">💬<span class="chat-badge">1</span></button>
+</div>
+
+<div class="global-toast" id="globalToast"></div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo"><span class="logo-icon">✦</span><span>StayVenture</span></a>
+        <p>Creating extraordinary travel experiences since 2009.</p>
+        <div class="social-row"><a href="#" class="soc">📸</a><a href="#" class="soc">🐦</a><a href="#" class="soc">📘</a></div>
+      </div>
+      <div class="footer-col"><h4>Explore</h4><a href="Destination.html">Destinations</a><a href="Packages.html">Packages</a><a href="contact.html">Contact</a></div>
+      <div class="footer-col"><h4>Contact</h4><a href="tel:8870460519">📞 8870460519</a><a href="mailto:auranookhomes@gmail.com">📧 Email Us</a><a>📍 Coimbatore, India</a></div>
+      <div class="footer-col"><h4>Support</h4><a href="#">Help Center</a><a href="#">Cancellation</a><a href="#">Privacy Policy</a></div>
+    </div>
+    <div class="footer-bottom"><span>© 2025 StayVenture Travel Agency.</span><span>Made with ❤️ in India</span></div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
