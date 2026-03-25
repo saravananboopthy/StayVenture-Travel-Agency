@@ -4,7 +4,7 @@
    Booking · Calendar · Payment · Dashboard · Chatbot · Wishlist
 ═══════════════════════════════════════════════════════════════ */
 
-const GEMINI_API_KEY = 'AIzaSyCfe_kFEp_XNvd3tHUFQPgi8HE1zcQKOpU';
+
 
 /* ── DATA ─────────────────────────────────────────────────────── */
 const DESTINATIONS = [
